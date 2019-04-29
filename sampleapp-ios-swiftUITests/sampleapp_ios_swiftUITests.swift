@@ -21,4 +21,21 @@ class sampleapp_ios_swiftUITests: XCTestCase {
         let fatalErrorButtonQuery = app.buttons.matching(identifier: "fatalErrorButton")
         XCTAssert(window.frame.contains(fatalErrorButtonQuery.accessibilityFrame))
     }
+    
+    func testSwipeAndSendEvent(){
+        let window = app.windows.element(boundBy: 0)
+        let app = XCUIApplication()
+        
+        window.swipeLeft()
+        window.swipeLeft()
+        window.swipeLeft()
+        window.swipeLeft()
+        window.swipeLeft()
+        
+        let eventButton = app.buttons["Send a sample event"]
+        eventButton.tap()
+        
+        let eventAlert = window.alerts["Event sent"]
+        XCTAssert(window.frame.contains(eventAlert.accessibilityFrame))
+    }
 }
